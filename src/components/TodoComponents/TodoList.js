@@ -17,6 +17,7 @@ const TodoList = (props) => {
       <TodoForm
         handleChange={props.handleChange}
         handleSubmit={props.handleSubmit}
+        handleClear={props.handleClear}
       />
     </div>
   );

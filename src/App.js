@@ -13,10 +13,12 @@ class App extends React.Component {
   }
 
   /*========== HANDLERS ==========*/
+  // Add input text content changes in TodoForm to state
   handleChange = (event) => {
     this.setState({ task: event.target.value });
   };
 
+  // Add data to state for each to-do
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
@@ -33,6 +35,7 @@ class App extends React.Component {
     event.target.reset();
   };
 
+  // Function to be executed in handleCompleted() when component updates (Toggle completed's boolean value if the value of id matches a specific to-do's id)
   componendDidUpdate = () => {
     this.state.data.map((item) => {
       console.log(item.id);
@@ -44,11 +47,18 @@ class App extends React.Component {
     console.log(this.state.id);
   };
 
+  // Set id to the specific to-do's id when clicked, then run componentDidUpdate when the component updates
   handleCompleted = (event) => {
     this.setState(
       { id: parseInt(event.target.id, 10) },
       this.componendDidUpdate
     );
+  };
+
+  // Set data to only the objects whose completed value equals false
+  handleClear = (event) => {
+    event.preventDefault();
+    this.setState({ data: this.state.data.filter((item) => !item.completed) });
   };
 
   /*========== RENDER ==========*/
@@ -61,6 +71,7 @@ class App extends React.Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           handleCompleted={this.handleCompleted}
+          handleClear={this.handleClear}
         />
       </div>
     );
