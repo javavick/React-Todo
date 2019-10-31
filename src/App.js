@@ -1,5 +1,5 @@
 import React from "react";
-import TodoForm from "./components/TodoComponents/TodoForm.js";
+import TodoList from "./components/TodoComponents/TodoList.js";
 
 class App extends React.Component {
   /*========== STATE ==========*/
@@ -27,11 +27,28 @@ class App extends React.Component {
           id: Date.now(),
           completed: false
         }
-      ],
-      id: this.state.data.id
+      ]
     });
     console.log(this.state);
     event.target.reset();
+  };
+
+  componendDidUpdate = () => {
+    this.state.data.map((item) => {
+      console.log(item.id);
+      if (item.id === this.state.id) {
+        item.completed = !item.completed;
+        this.forceUpdate();
+      }
+    });
+    console.log(this.state.id);
+  };
+
+  handleCompleted = (event) => {
+    this.setState(
+      { id: parseInt(event.target.id, 10) },
+      this.componendDidUpdate
+    );
   };
 
   /*========== RENDER ==========*/
@@ -39,9 +56,11 @@ class App extends React.Component {
     return (
       <div>
         <h1>Welcome to your Todo App!</h1>
-        <TodoForm
+        <TodoList
+          state={this.state}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
+          handleCompleted={this.handleCompleted}
         />
       </div>
     );
