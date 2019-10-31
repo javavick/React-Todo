@@ -7,6 +7,7 @@ class App extends React.Component {
     super();
     this.state = {
       task: "",
+      id: 0,
       data: []
     };
   }
@@ -26,7 +27,8 @@ class App extends React.Component {
           id: Date.now(),
           completed: false
         }
-      ]
+      ],
+      id: this.state.data.id
     });
     console.log(this.state);
     event.target.reset();
@@ -36,7 +38,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
+        <h1>Welcome to your Todo App!</h1>
         <TodoForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
